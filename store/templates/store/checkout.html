@@ -1,0 +1,105 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+  <div class="col-lg-6">
+    <div class="box-element" id="form-wrapper">
+      <form id="form">
+        <div id="user-info">
+          <div class="form-field">
+            <input required class="form-control" type="text" name="name" placeholder="Name..">
+          </div>
+          <div class="form-field">
+            <input required class="form-control" type="text" name="email" placeholder="Email..">
+          </div>
+        </div> 
+        
+        <div id="shipping-info">
+          <hr>
+          <p>Shipping Information:</p>
+          <hr>
+          <div class="form-field">
+            <input class="form-control" type="text" name="address" placeholder="Address..">
+          </div>
+          <div class="form-field">
+            <input class="form-control" type="text" name="city" placeholder="City..">
+          </div>
+          <div class="form-field">
+            <input class="form-control" type="text" name="state" placeholder="State..">
+          </div>
+          <div class="form-field">
+            <input class="form-control" type="text" name="country" placeholder="Country..">
+          </div>
+        </div>
+        
+        <hr>
+        <input id="form-button" class="btn btn-success btn-block" type="submit" value="Continue">
+      </form>
+    </div>
+  
+    <div class="box-element hidden" id="payment-info">
+      <button id="make-payment">Make Payments</button>
+    </div>
+  </div>
+  
+  <div class="col-lg-6">
+    <div class="box-element">
+      <a  class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Back to Cart</a>
+      <hr>
+      <h3>Order Summary</h3>
+      <hr>
+      
+      {% for orderitem in order.orderitem_set.all %}
+      <div class="cart-row">
+        <div style="flex:2"><img class="row-image" src="{% static orderitem.product.image_url %}"></div>
+        <div style="flex:2"><p>{{ orderitem.product.name }}</p></div>
+        <div style="flex:1"><p>${{ orderitem.product.price }}</p></div>
+        <div style="flex:1"><p>x{{ orderitem.quantity }}</p></div>
+      </div>
+      {% endfor %}
+
+      <h5>Items: {{ order.get_cart_items }}</h5>
+      <h5>Total: ${{ order.get_cart_grandtotal|floatformat:2 }}</h5>
+    </div>
+  </div>
+</div>
+
+
+<script>
+    // Prevent the default behavior for 'continue' button
+    const form = document.getElementById('form');
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+    });
+
+    const formButton = document.getElementById('form-button');
+    const makePayment = document.getElementById('payment-info');
+
+
+    // Switch the 'continue' button to the 'make payment' button
+    formButton.addEventListener('click', () => {
+        formButton.classList.add('hidden')
+        makePayment.classList.remove('hidden');
+    });
+
+    makePayment.addEventListener('click', ()=> {
+        const url = "/process_order/";
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify(),
+        })
+        .then(response => {
+            window.location.href = '{% url "store" %}';
+        })
+        .catch(error => console.error(error));
+    })
+
+</script>
+
+{% endblock content %}
