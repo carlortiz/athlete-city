@@ -20,7 +20,6 @@ def cart(request):
     order, created = Order.objects.get_or_create(customer=customer, completed=False)
 
     context = { 'customer': customer, 'order': order}
-
     return render(request, 'store/cart.html', context)
 
 
@@ -40,7 +39,6 @@ def update_item(request):
     order, created = Order.objects.get_or_create(customer=customer, completed=False)
     order_items = order.orderitem_set.all()
 
-    # finds the order item with a product name that matches the product name above
     order_item = order_items.filter(product__name=product_name).first()
     if order_item:
         order_item.quantity += 1
@@ -50,12 +48,7 @@ def update_item(request):
         order_item = OrderItem.objects.create(order=order, product=product, quantity=1)
 
     cart_items = order.get_cart_items()
-
-    data = {
-        'message': 'Quantity updated.',
-        'cart_items': cart_items,
-    }
-
+    data = {'message': 'Quantity updated.','cart_items': cart_items,}
     return JsonResponse(data)
 
 
@@ -67,9 +60,5 @@ def process_order(request):
     order.save()
 
     new_order = Order.objects.create(customer=customer)
-
-    response_data = {
-        'message': 'Order processed successfully.'
-    }
-
+    response_data = {'message': 'Order processed successfully.'}
     return JsonResponse(response_data)
