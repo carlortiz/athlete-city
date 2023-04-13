@@ -18,6 +18,10 @@ h6{
   font-size: 24px; /* change the font size as desired */
 }
 
+.nav-link {
+	color: white !important;
+}
+
 .box-element{
 	box-shadow:hsl(0, 0%, 80%) 0 0 16px;
 	background-color: #fff;
