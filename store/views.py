@@ -34,21 +34,29 @@ def checkout(request):
 def update_item(request):
     data = json.loads(request.body)
     product_name = data.get('product_name')
+    action = data.get('action')
 
     customer, created = Customer.objects.get_or_create(user=request.user)
     order, created = Order.objects.get_or_create(customer=customer, completed=False)
     order_items = order.orderitem_set.all()
 
     order_item = order_items.filter(product__name=product_name).first()
-    if order_item:
-        order_item.quantity += 1
-        order_item.save()
-    else: 
+    if not order_item:
         product = Product.objects.get(name=product_name)
         order_item = OrderItem.objects.create(order=order, product=product, quantity=1)
 
+    if action == "add":
+        order_item.quantity += 1
+    else:
+        order_item.quantity -= 1
+        
+    order_item.save()
     cart_items = order.get_cart_items()
-    data = {'message': 'Quantity updated.','cart_items': cart_items,}
+    data = {
+        'message': 'Quantity updated.',
+        'cart_items': cart_items, 
+        'item_quantity': order_item.quantity
+    }
     return JsonResponse(data)
 
 
