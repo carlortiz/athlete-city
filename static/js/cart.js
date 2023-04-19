@@ -36,14 +36,14 @@ function updateUserOrder(data)
     .then(data => {
         const cartTotalElement = document.getElementById("cart-total");
         if (cartTotalElement) {
-            cartTotalElement.innerText = data['cart_items'];
+            const updatedCartQuantity = data['cart_items'];
+            cartTotalElement.innerText = updatedCartQuantity;
         }
 
-        // This grabs the first element in the document with that ID
-        // We need it to grab the element that corresponds to the product
-        const itemTotalElement = document.getElementById("item-total");
+        const itemTotalElement = document.getElementById(data["item_name"]);
         if (itemTotalElement) {
-            itemTotalElement.innerText = 'x' + data['item_quantity'];
+            const updatedItemQuantity = 'x' + data['item_quantity'] ;
+            itemTotalElement.innerText = updatedItemQuantity;
         } 
     })
     .catch(error => console.error(error));

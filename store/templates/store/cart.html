@@ -36,7 +36,7 @@
 				<div style="flex:2"><p>{{ orderitem.product.name }}</p></div>
 				<div style="flex:1"><p>${{ orderitem.product.price }}</p></div>
 				<div style="flex:1">
-					<p class="quantity" id="item-total">x{{ orderitem.quantity }}
+					<p class="quantity" id="{{ orderitem.product.name }} quantity">x{{ orderitem.quantity }}
 					</p> 
 					<div class="quantity">
 						<img class="chg-quantity update-cart" src="{% static 'images/arrow-up.png' %}"
@@ -49,7 +49,6 @@
 				<div style="flex:1"><p>${{ orderitem.get_item_total }}</p></div>
 			</div>
 			{% endfor %}
-
 		</div>
 	</div>
 </div>

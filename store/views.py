@@ -2,6 +2,7 @@ import json
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from .models import Customer, Order, Product, OrderItem
+from .utils import get_or_create_order_item, update_order_item_quantity
 
 # Create your views here
 
@@ -40,22 +41,15 @@ def update_item(request):
     order, created = Order.objects.get_or_create(customer=customer, completed=False)
     order_items = order.orderitem_set.all()
 
-    order_item = order_items.filter(product__name=product_name).first()
-    if not order_item:
-        product = Product.objects.get(name=product_name)
-        order_item = OrderItem.objects.create(order=order, product=product, quantity=1)
-
-    if action == "add":
-        order_item.quantity += 1
-    else:
-        order_item.quantity -= 1
-        
+    order_item = get_or_create_order_item(product_name, order_items, order)
+    order_item.quantity = update_order_item_quantity(action, order_item)
+    
     order_item.save()
     cart_items = order.get_cart_items()
     data = {
-        'message': 'Quantity updated.',
         'cart_items': cart_items, 
-        'item_quantity': order_item.quantity
+        'item_quantity': order_item.quantity,
+        'item_name': order_item.product.name + " quantity",
     }
     return JsonResponse(data)
 
