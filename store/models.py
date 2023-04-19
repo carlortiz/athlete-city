@@ -4,10 +4,7 @@ from django.conf import settings
 from django.utils import timezone
 from django.contrib.auth.models import User
 
-TAX_RATE = 0.0725
-
 # Create your models here.
-
 
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
@@ -53,7 +50,7 @@ class Order(models.Model):
         return subtotal
     
     def calculate_tax(self, subtotal):
-        tax = TAX_RATE * subtotal
+        tax = 0.075 * subtotal
         return tax
     
     def get_cart_grandtotal(self):
