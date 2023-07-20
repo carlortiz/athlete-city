@@ -1,4 +1,4 @@
-# Ecommerce Site
+# Athlete City
 
 A web app built with Django designed to be an online platform for selling online products. 
 
