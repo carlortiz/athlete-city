@@ -12,7 +12,7 @@ A web app built with Django designed to be an online platform for selling online
 
 # General
 
-I built a backend system using Django to manage complex data models. I utilized JavaScript and the fetch API to make requests to the server
+I built a backend system using Django to manage complex data models. I utilized JavaScript and the fetch API to make requests to the server.
 
 # Tools
 - Django 4.1
