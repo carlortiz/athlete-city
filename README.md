@@ -17,3 +17,5 @@ Using this E-Commerce Store, you can simulate putting items into your cart, chec
 # Tools
 - Django 4.1
 - Python 3.10
+- HTML
+- CSS
