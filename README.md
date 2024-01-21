@@ -12,7 +12,7 @@ A web app built with Django designed to be an online platform for selling produc
 
 # General
 
-Using this E-Commerce Store, you can simulate putting items into their cart, checking those items out, and inputting in your shipping information.
+Using this E-Commerce Store, you can simulate putting items into your cart, checking those items out, and inputting in your shipping information.
 
 # Tools
 - Django 4.1
