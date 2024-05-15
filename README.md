@@ -7,7 +7,7 @@ A web app built with Django designed to be an online platform for selling produc
   <img src="https://user-images.githubusercontent.com/45545195/232338062-eee5c2a8-a95e-4f04-a93c-5cfcfc744be1.png" width=88% height=135%></center>
 </p>
 
-# Django ORM, Django admin dashboard, & Restful API's
+# Django ORM, Django admin dashboard, & Restful API
 
 ## Django ORM
 
@@ -20,6 +20,10 @@ The Django admin dashboard serves as the command center of our e-commerce platfo
 <p align="center"> 
   <img src="https://github.com/carlortiz/e-commerce-store/assets/45545195/b96b091f-4592-453c-8459-0370c8882733" width=68% height=115%></center>
 </p>
+
+## Restful API
+
+A RESTful API (Representational State Transfer) enables different software systems to communicate over HTTP, similar to how browsers interact with websites. By incorporating the Django REST Framework, we can create an API that allows external applications to interact with our e-commerce platform programmatically.
 
 # General
 
