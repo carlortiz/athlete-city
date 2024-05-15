@@ -23,7 +23,7 @@ The Django admin dashboard serves as the command center of our e-commerce platfo
 
 ## Restful API
 
-A RESTful API (Representational State Transfer) enables different software systems to communicate over HTTP, similar to how browsers interact with websites. By incorporating the Django REST Framework, we can create an API that allows external applications to interact with our e-commerce platform programmatically.
+A RESTful API (Representational State Transfer) enables different software systems to communicate over HTTP, similar to how browsers interact with websites. By incorporating the Django REST Framework, we can create an API that allows external applications to interact with our e-commerce platform programmatically. Essentially, third-party applications would be able to work with the data in our e-commerce applications.
 
 # General
 
